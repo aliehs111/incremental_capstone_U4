@@ -1,24 +1,25 @@
 # Byte-compiled / cache files
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Jupyter notebook checkpoints
+# Jupyter
 .ipynb_checkpoints/
 
-# Virtual-env files (if you ever create a venv folder here)
+# Virtual envs
 venv/
 env/
 .venv/
 
-# VS Code workspace files
+# Editor settings
 .vscode/
 
-# MacOS files
+# macOS
 .DS_Store
 
-# Notebook-specific
-*.ipynb_checkpoints
+# Model artifacts
+*.h5
+*.keras
 
-# Large data / images (if you don’t want to commit raw files)
+# Dataset 
 images/
 dataset/

@@ -19,3 +19,28 @@
  - preprocessing steps (loading, splitting, normalizing, augmenting, caching/prefetching) are complete—train_ds and val_ds are ready to feed into a CNN.
 
 Next step: switch to train_model.ipynb to build, compile, and train the convolutional model.
+
+## 2025-06-07
+- **Refreshed environment**: Restarted kernel and consolidated imports in Cell 1, including:
+  - `os.chdir("..")` to set project root
+  - `tensorflow`, `layers`, `models`, `callbacks`
+  - `from data_utils import get_datasets`
+  - `numpy` and `matplotlib.pyplot`
+- **Loaded datasets** by calling `train_ds, val_ds = get_datasets()`, verified 20 training and 5 validation batches.
+- **Built and summarized CNN** (three Conv→BatchNorm→Pool blocks, Flatten→Dense(128)→Dropout→Dense(1, sigmoid)).
+- **Compiled model** with Adam (lr=1e-4), binary crossentropy, and set up:
+  - `EarlyStopping(patience=5, restore_best_weights=True)`
+  - `ModelCheckpoint('best_model.h5', save_best_only=True)`
+- **Trained** for up to 20 epochs; saw validation accuracy peak at ~90.5% around epoch 13 and early stop around epoch 18.
+- **Evaluated** best model:
+  - Accuracy: **0.9051**, Loss: **0.7564**
+  - Confusion matrix:  
+    ```
+    [[77  6]
+     [ 9 66]]
+    ```
+  - Precision/Recall/F1 for “Bike” and “Car”: ~0.91 / ~0.90 / ~0.90
+- **Plotted** training vs. validation accuracy & loss curves.
+- **Displayed** sample predictions (3×3 grid) with true vs. predicted labels and confidence scores.
+
+*Next:* Analyze overfitting/underfitting from the plots, tweak hyperparameters or architecture as needed, then draft the final report.  
