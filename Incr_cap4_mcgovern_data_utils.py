@@ -32,7 +32,7 @@ def get_datasets(image_dir="images"):
         seed=123,
         image_size=(IMG_HEIGHT, IMG_WIDTH),
         batch_size=BATCH_SIZE,
-        shuffle=True
+        shuffle=False
     )
 
     # 2) Normalize pixel values
@@ -41,11 +41,21 @@ def get_datasets(image_dir="images"):
     val_ds   = val_ds.map(lambda x, y: (normalization_layer(x), y),   num_parallel_calls=AUTOTUNE)
 
     # 3) Data augmentation on training only
+    # data_augmentation = tf.keras.Sequential([
+    # tf.keras.layers.RandomFlip("horizontal"),
+    # tf.keras.layers.RandomRotation(0.2),     # ±20°
+    # tf.keras.layers.RandomZoom(0.2),         # ±20%
+    # tf.keras.layers.RandomContrast(0.2),     # ±20%
+    # tf.keras.layers.RandomTranslation(0.2, 0.2),  # ±20% shift
+    # tf.keras.layers.RandomBrightness(0.2),   # ±20% brightness
+
+
     data_augmentation = tf.keras.Sequential([
-        tf.keras.layers.RandomFlip("horizontal"),
-        tf.keras.layers.RandomRotation(0.1),
-        tf.keras.layers.RandomZoom(0.1),
-    ])
+    tf.keras.layers.RandomFlip("horizontal"),
+    tf.keras.layers.RandomRotation(0.1),
+    tf.keras.layers.RandomZoom(0.1),
+])
+        
     train_ds = train_ds.map(lambda x, y: (data_augmentation(x, training=True), y),
                              num_parallel_calls=AUTOTUNE)
 

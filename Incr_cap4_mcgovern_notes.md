@@ -44,3 +44,27 @@ Next step: switch to train_model.ipynb to build, compile, and train the convolut
 - **Displayed** sample predictions (3×3 grid) with true vs. predicted labels and confidence scores.
 
 *Next:* Analyze overfitting/underfitting from the plots, tweak hyperparameters or architecture as needed, then draft the final report.  
+
+## 2025-06-09
+- tried several different combinations of hyperparameter tuning and rebuilding the layers of the model.  The results were either overfitting or just poor accuracy.
+- In the end, taking out the batch normalization layers (all 3 of them) and that seemed to do the trick.  Final Results:
+Final Train Acc:      0.9068
+Final Validation Acc: 0.8228
+Accuracy Gap:         0.0840
+Final Train Loss:     0.2649
+Final Validation Loss:0.3950
+Loss Gap:             0.1300
+
+Confusion Matrix:
+[[  0   0]
+ [ 45 113]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Bike       0.00      0.00      0.00         0
+         Car       1.00      0.72      0.83       158
+
+    accuracy                           0.72       158
+   macro avg       0.50      0.36      0.42       158
+weighted avg       1.00      0.72      0.83       158
